@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\KreditursController;
+use App\Http\Controllers\testController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//Route::resource('/Kreditur', 'KrediturController');
+Route::resource('/', 'DashboardController',  ['only'=>['index']]);
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::resource('Krediturs', 'KreditursController');
