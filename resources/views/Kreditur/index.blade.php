@@ -82,7 +82,7 @@ let table = $('.dataTable').DataTable({
              orderable: false,
              searchable: false,
              render: function(data){
-                 return `<a class="btn bg-deep-orange waves-effect" href="Krediturs/${data}"><i class="material-icons">edit</i></a>`
+                 return `<a class="btn bg-deep-orange waves-effect" href="Krediturs/${data}/edit"><i class="material-icons">edit</i></a>`
              }
             }
         ]

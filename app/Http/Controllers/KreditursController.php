@@ -29,16 +29,6 @@ class KreditursController extends Controller
         return view('Kreditur.index');
     }
 
-    public function Kreditur(Request $request){
-
-        if ($request->ajax()) {
-            $data = DB::table('kreditur');
-            return DataTables::of($data)
-            ->addIndexColumn()
-            ->make(true);
-        }
-        return view('Kreditur.index');
-    }
     /**
      * Show the form for creating a new resource.
      *
@@ -80,6 +70,9 @@ class KreditursController extends Controller
     public function edit($id)
     {
         //
+        $kreditur = DB::table('kreditur')->where('Id_Kreditur', $id)->first();
+        //dd($kreditur);
+        return view('Kreditur.edit', ['kreditur'=>$kreditur]);
     }
 
     /**
@@ -92,6 +85,7 @@ class KreditursController extends Controller
     public function update(Request $request, $id)
     {
         //
+        dd($request);
     }
 
     /**
