@@ -41,7 +41,7 @@ Dashboard
             </div>
             <div class="content">
                 <div class="text">Total Kredit</div>
-                <div class="number count-to" data-from="0" data-to="{{$Kredit}}" data-speed="3000" data-fresh-interval="20"></div>
+                <div class="number sales-count-to" data-from="0" data-to="{{$Kredit}}" data-speed="3000" data-fresh-interval="20"></div>
             </div>
         </div>
     </div>
@@ -53,7 +53,7 @@ Dashboard
             </div>
             <div class="content">
                 <div class="text">Total Angsuran</div>
-                <div class="number count-to" data-from="0" data-to="{{$Angsuran}}" data-speed="2500" data-fresh-interval="20"></div>
+                <div class="number sales-count-to" data-from="0" data-to="{{$Angsuran}}" data-speed="2500" data-fresh-interval="20"></div>
             </div>
         </div>
     </div>

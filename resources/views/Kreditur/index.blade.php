@@ -18,6 +18,20 @@ KREDITUR
                 <h2>Tabel Daftar Kreditur</h2>
             </div>
             <div class="body">
+                {{-- show success message --}}
+                @if ($message = Session::get('success'))
+                <div class="alert alert-success">
+                    <a href="#" class="close" data-dismiss="alert">&times;</a>
+                    <p>{{ $message }}</p>
+                </div>
+                @endif
+                {{-- show error message --}}
+                @if ($message = Session::get('error'))
+                <div class="alert alert-error">
+                    <a href="#" class="close" data-dismiss="alert">&times;</a>
+                    <p>{{ $message }}</p>
+                </div>
+                @endif
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                         <thead>

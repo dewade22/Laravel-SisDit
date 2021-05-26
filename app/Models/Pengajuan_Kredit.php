@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Pengajuan_Kredit extends Model
 {
     //
+    protected $table = 'pengajuan_kredit';
+    protected $primaryKey = 'Id_Pengajuan';
+    public $incrementing = false;
+    protected $keyType = 'string';
+    public $timestamps = false;
     protected $fillable = [
         'Id_Pengajuan',
         'Id_Kreditur',

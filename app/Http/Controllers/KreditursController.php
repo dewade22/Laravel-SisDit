@@ -1,11 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\KrediturModel;
+use Exception;
+use Illuminate\Support\Facades\Config;
 use Yajra\DataTables\DataTables;
+
+use function GuzzleHttp\Promise\exception_for;
 
 class KreditursController extends Controller
 {
@@ -14,6 +18,19 @@ class KreditursController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    protected function validator(array $data){
+        return Validator::make($data, [
+            'Nama_Kreditur' => 'required|string|max:50',
+            'Tempat_Lahir' => 'required|string|max:50',
+            'Tanggal_Lahir' => 'required|date',
+            'Jenis_Kelamin' => 'required|string|max:1',
+            'Pekerjaan' => 'required|max:50',
+            'Telepon' => 'max:15',
+            'Alamat' => 'required|max:255',
+            'No_KTP' => 'required|max:15',
+        ]);
+    }
     public function index(Request $request)
     {
         //
@@ -70,7 +87,8 @@ class KreditursController extends Controller
     public function edit($id)
     {
         //
-        $kreditur = DB::table('kreditur')->where('Id_Kreditur', $id)->first();
+        //$kreditur = DB::table('kreditur')->where('Id_Kreditur', $id)->first();
+        $kreditur = KrediturModel::findOrFail($id);
         //dd($kreditur);
         return view('Kreditur.edit', ['kreditur'=>$kreditur]);
     }
@@ -85,7 +103,21 @@ class KreditursController extends Controller
     public function update(Request $request, $id)
     {
         //
-        dd($request);
+        //dd($request);
+        $newKreditur = $request->all();
+        $this->validator($newKreditur)->validate();
+        try{
+            $currentKreditur = KrediturModel::findOrFail($id);
+            if($currentKreditur){
+                $currentKreditur->update($newKreditur);
+                return redirect()->route('Krediturs.index')->with('success', Config::get('const.SUCCESS_UPDATE_MESSAGE'));
+            }
+        }
+        catch(Exception $ex){
+            return redirect()->route('Krediturs.index')->with('error', Config::get('const.FAILED_UPDATE_MESSAGE'));
+        }
+
+
     }
 
     /**

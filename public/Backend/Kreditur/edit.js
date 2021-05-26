@@ -34,4 +34,6 @@ $(function(){
         autoclose: true,
         container: '#bs_datepicker_range_container'
     });
+
+    $('#form_edit').validate();
 })
