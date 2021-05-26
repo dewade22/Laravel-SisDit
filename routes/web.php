@@ -18,3 +18,5 @@ use Illuminate\Support\Facades\Route;
 Route::resource('/', 'DashboardController',  ['only'=>['index']]);
 
 Route::resource('Krediturs', 'KreditursController');
+
+Route::resource('Jaminan', 'JaminanController');

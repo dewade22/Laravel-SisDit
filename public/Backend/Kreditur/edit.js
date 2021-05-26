@@ -1,4 +1,10 @@
 $(function(){
+    //Activate Menu bar
+    $('li#master_Data').addClass('active')
+    $('li#master_Data').find('.ml-menu').css('display', 'block')
+    $('li#master_Data').find('a').addClass('toggled')
+    $('#kreditur').addClass('active')
+
     //Datetimepicker plugin
     $('.datetimepicker').bootstrapMaterialDatePicker({
         format: 'dddd DD MMMM YYYY - HH:mm',
@@ -35,5 +41,7 @@ $(function(){
         container: '#bs_datepicker_range_container'
     });
 
+    //Validation Form
     $('#form_edit').validate();
+
 })

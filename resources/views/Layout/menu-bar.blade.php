@@ -37,7 +37,11 @@
                             <li id="kreditur">
                                 <a href="{{route('Krediturs.index')}}">Kreditur</a>
                             </li>
+                            <li id="jaminan">
+                                <a href="{{route('Jaminan.index')}}">Jaminan</a>
+                            </li>
                         </ul>
+
                     </li>
                     <li>
                         <a href="#">
