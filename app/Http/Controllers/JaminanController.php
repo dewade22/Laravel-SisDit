@@ -18,6 +18,17 @@ class JaminanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+    protected function validator(array $data){
+        return Validator::make($data, [
+            'Jaminan' => 'required|string|max:200',
+            'Besar_Pinjaman_Maksimal' => 'required|numeric',
+            'Besar_Pinjaman_Minimal' => 'required|numeric',
+            'Jangka_Waktu_Maksimal' => 'required|numeric',
+            'Jangka_Waktu_Minimal' => 'required|numeric',
+        ]);
+    }
     public function index(Request $request)
     {
         //
@@ -71,6 +82,8 @@ class JaminanController extends Controller
     public function edit($id)
     {
         //
+        $jaminan = JaminanModel::findOrFail($id);
+        return view('Jaminan.edit', ['jaminan'=>$jaminan]);
     }
 
     /**
@@ -83,6 +96,26 @@ class JaminanController extends Controller
     public function update(Request $request, $id)
     {
         //
+        /*convert dari input string dan hilangkan koma pemisah ribuan*/
+        $pinjamanMax = floatval(str_replace(',', '', $request->Besar_Pinjaman_Maksimal));
+        $pinjamanMin = floatval(str_replace(',', '', $request->Besar_Pinjaman_Minimal));
+
+        /*modifikasi file request dari inputan form dengan hasil convert*/
+        $request->merge(['Besar_Pinjaman_Maksimal' =>$pinjamanMax,
+        'Besar_Pinjaman_Minimal'=> $pinjamanMin]);
+        $newJaminan = $request->all();
+        $this->validator($newJaminan)->validate();
+        try{
+            $currentJaminan = JaminanModel::findorfail($id);
+            if($currentJaminan){
+                $currentJaminan->update($newJaminan);
+                return redirect()->route('Jaminan.index')->with('success', Config::get('const.SUCCESS_UPDATE_MESSAGE'));
+            }
+        }
+        catch(Exception $ex){
+            return redirect()->route('Jaminan.index')->with('error', Config::get('const.FAILED_UPDATE_MESSAGE'));
+        }
+
     }
 
     /**
