@@ -1,13 +1,11 @@
 $(function(){
-    //Activate Menu bar
     $('li#master_Data').addClass('active')
     $('li#master_Data').find('.ml-menu').css('display', 'block')
     $('li#master_Data').find('a').addClass('toggled')
     $('#jaminan').addClass('active')
 
-
     //Validasi Form
-    $('#form-edit').validate({
+    $('#form-add').validate({
         onkeyup: function(element) {$(element).valid()},
         rules:{
             Jaminan: {
@@ -19,12 +17,11 @@ $(function(){
             Besar_Pinjaman_Minimal :{
                 numbers: true
             },
-            
         }
-    });
+    })
 
     //Value regex
-    let character = new RegExp(/[\w,.!?]+$/) // RegExp(/^[a-zA-Z0-9 -]+$/)
+    let character = new RegExp(/[\w,.!?]+$/) //RegExp(/^[a-zA-Z0-9 -]+$/)
     let space = new RegExp(/^[^ -]/)
 
     let validateJaminan = function(value) {

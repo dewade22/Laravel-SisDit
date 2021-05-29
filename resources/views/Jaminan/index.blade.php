@@ -12,6 +12,7 @@ JAMINAN
                 <h2>Tabel Daftar Jaminan</h2>
             </div>
             <div class="body">
+                <a class="btn bg-light-blue waves-effect" href="{{route("Jaminan.create")}}"><i class="material-icons">add_box</i> New Jaminan</a>
                  {{-- show success message --}}
                  @if ($message = Session::get('success'))
                  <div class="alert alert-success">

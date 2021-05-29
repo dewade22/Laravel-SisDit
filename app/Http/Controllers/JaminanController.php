@@ -49,6 +49,8 @@ class JaminanController extends Controller
     public function create()
     {
         //
+        $jaminan = new JaminanModel();
+        return view("Jaminan.create", ['jaminan'=>$jaminan]);
     }
 
     /**
@@ -60,6 +62,21 @@ class JaminanController extends Controller
     public function store(Request $request)
     {
         //
+        $hasil = $this->convertString($request);
+        $newJaminan = $hasil->all();
+        $this-> validator($newJaminan)->validate();
+        try{
+            $add = JaminanModel::create($newJaminan);
+            if($add){
+                return redirect()->route('Jaminan.index')->with('success', Config::get('const.SUCCESS_CREATE_MESSAGE'));
+            }
+            else{
+                return redirect()->route('Jaminan.index')->with('error', Config::get('const.FAILED_ADD_MESSAGE'));
+            }
+        }
+        catch(Exception $ex){
+            return redirect()->route('Jaminan.index')->with('error', Config::get('const.FAILED_ADD_MESSAGE'));
+        }
     }
 
     /**
@@ -96,14 +113,8 @@ class JaminanController extends Controller
     public function update(Request $request, $id)
     {
         //
-        /*convert dari input string dan hilangkan koma pemisah ribuan*/
-        $pinjamanMax = floatval(str_replace(',', '', $request->Besar_Pinjaman_Maksimal));
-        $pinjamanMin = floatval(str_replace(',', '', $request->Besar_Pinjaman_Minimal));
-
-        /*modifikasi file request dari inputan form dengan hasil convert*/
-        $request->merge(['Besar_Pinjaman_Maksimal' =>$pinjamanMax,
-        'Besar_Pinjaman_Minimal'=> $pinjamanMin]);
-        $newJaminan = $request->all();
+        $hasil = $this->convertString($request);
+        $newJaminan = $hasil->all();
         $this->validator($newJaminan)->validate();
         try{
             $currentJaminan = JaminanModel::findorfail($id);
@@ -127,5 +138,17 @@ class JaminanController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function convertString($request){
+        /*convert dari input string dan hilangkan koma pemisah ribuan*/
+        $pinjamanMax = floatval(str_replace(',', '', $request->Besar_Pinjaman_Maksimal));
+        $pinjamanMin = floatval(str_replace(',', '', $request->Besar_Pinjaman_Minimal));
+
+        /*modifikasi file request dari inputan form dengan hasil convert*/
+        $request->merge(['Besar_Pinjaman_Maksimal' =>$pinjamanMax,
+        'Besar_Pinjaman_Minimal'=> $pinjamanMin]);
+
+        return($request);
     }
 }
