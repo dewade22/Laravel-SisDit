@@ -20,3 +20,5 @@ Route::resource('/', 'DashboardController',  ['only'=>['index']]);
 Route::resource('Krediturs', 'KreditursController');
 
 Route::resource('Jaminan', 'JaminanController');
+
+Route::resource('Bunga', 'BungaController');

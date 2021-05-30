@@ -4,12 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\DB;
 use Exception;
 use Illuminate\Support\Facades\Config;
 use Yajra\DataTables\DataTables;
 use App\Models\JaminanModel;
-use Yajra\DataTables\Contracts\DataTable;
 
 class JaminanController extends Controller
 {

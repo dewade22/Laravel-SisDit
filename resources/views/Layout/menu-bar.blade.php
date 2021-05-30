@@ -40,6 +40,9 @@
                             <li id="jaminan">
                                 <a href="{{route('Jaminan.index')}}">Jaminan</a>
                             </li>
+                            <li id="bunga">
+                                <a href="{{route('Bunga.index')}}">Bunga</a>
+                            </li>
                         </ul>
 
                     </li>
