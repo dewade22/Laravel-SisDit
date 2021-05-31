@@ -16,6 +16,11 @@ class BungaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function getRoute(){
+        return 'Bunga';
+    }
+
     public function index(Request $request)
     {
         //
@@ -36,6 +41,11 @@ class BungaController extends Controller
     public function create()
     {
         //
+        $bunga = new BungaModel();
+        $bunga->route = $this->getRoute().'.create';
+        $bunga->pageTitle = 'Bunga Create';
+        $bunga->pageType = 'create';
+        return view('Bunga.form', ['bunga' => $bunga]);
     }
 
     /**
