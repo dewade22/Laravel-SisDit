@@ -69,11 +69,11 @@ class JaminanController extends Controller
                 return redirect()->route('Jaminan.index')->with('success', Config::get('const.SUCCESS_CREATE_MESSAGE'));
             }
             else{
-                return redirect()->route('Jaminan.index')->with('error', Config::get('const.FAILED_ADD_MESSAGE'));
+                return redirect()->route('Jaminan.index')->with('error', Config::get('const.FAILED_CREATE_MESSAGE'));
             }
         }
         catch(Exception $ex){
-            return redirect()->route('Jaminan.index')->with('error', Config::get('const.FAILED_ADD_MESSAGE'));
+            return redirect()->route('Jaminan.index')->with('error', Config::get('const.FAILED_CREATE_MESSAGE'));
         }
     }
 
