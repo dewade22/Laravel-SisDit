@@ -53,8 +53,8 @@
                         </div>
                         <div class="col-lg-2 col-lg-offset-5 col-md-2 col-md-offset-5 col-sm-12 col-xs-12"><input type="submit" class="btn btn-primary form-control" value="Save"></div>
                     </div>
-                @if ($bunga->pageType == 'update')
-                {!! method_field('PUT') !!}
+                @if ($bunga->pageType == 'edit')
+                {!! method_field('PATCH') !!}
                 @endif
                 </form>
             </div>
@@ -68,5 +68,5 @@
 @endsection
 
 @section('js_section')
-
+    <script type="text/javascript" src="{{asset('Backend/Bunga/form.js')}}"></script>
 @endsection

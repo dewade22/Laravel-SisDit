@@ -103,6 +103,12 @@ class BungaController extends Controller
     public function edit($id)
     {
         //
+        $bunga = BungaModel::findorFail($id);
+        $bunga->Bunga_Kredit = $bunga->Bunga_Kredit*100;
+        $bunga->route = $this->getRoute().'.update';
+        $bunga->pageTitle = 'Bunga Edit';
+        $bunga->pageType = 'edit';
+        return view('Bunga.form', ['bunga' => $bunga]);
     }
 
     /**
@@ -115,6 +121,22 @@ class BungaController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $datas = $this->convertPersen($request);
+        $newBunga = $datas->all();
+       // dd($newBunga);
+        $this->Validator($newBunga)->validate();
+        try{
+           $currentBunga = BungaModel::findorFail($id);
+            if($currentBunga){
+                $currentBunga->update($newBunga);
+                return redirect()->route('Bunga.index')->with('success', Config::get('const.SUCCESS_CREATE_MESSAGE'));
+            }else{
+                return redirect()->route('Bunga.index')->with('error', Config::get('const.FAILED_CREATE_MESSAGE'));
+            }
+        }
+        catch (Exception $ex){
+            return redirect()->route('Bunga.index')->with('error', Config::get('const.FAILED_CREATE_MESSAGE'));
+        }
     }
 
     /**

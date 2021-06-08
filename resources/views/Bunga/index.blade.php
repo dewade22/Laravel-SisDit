@@ -77,7 +77,7 @@ BUNGA
             {data: 'Id_Bunga', name: 'Id_Bunga'},
             {data: 'Bunga_Kredit',
                 render: function(data){
-                    return `${data*100}%`
+                    return `${(data*100).toFixed(2)}%`
                 }
             },
             {data: 'Jenis_Bunga', name: 'Jenis_bunga'},
